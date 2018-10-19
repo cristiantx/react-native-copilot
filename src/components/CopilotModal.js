@@ -221,9 +221,7 @@ class CopilotModal extends Component<Props, State> {
 
   renderMask() {
     /* eslint-disable global-require */
-    const MaskComponent = this.props.overlay === 'svg'
-      ? require('./SvgMask').default
-      : require('./ViewMask').default;
+    const MaskComponent = require('./ViewMask').default;
     /* eslint-enable */
     return (
       <MaskComponent
@@ -282,12 +280,8 @@ class CopilotModal extends Component<Props, State> {
     const contentVisible = this.state.layout && containerVisible;
 
     return (
-      <Modal
-        animationType="none"
-        visible={containerVisible}
-        onRequestClose={noop}
-        transparent
-        supportedOrientations={['portrait', 'landscape']}
+      {containerVisible && <View
+       style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 100000 }}
       >
         <View
           style={styles.container}
@@ -296,7 +290,7 @@ class CopilotModal extends Component<Props, State> {
           {contentVisible && this.renderMask()}
           {contentVisible && this.renderTooltip()}
         </View>
-      </Modal>
+      </View> }
     );
   }
 }

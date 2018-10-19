@@ -274,13 +274,9 @@ class CopilotModal extends Component<Props, State> {
       </Animated.View>,
     ];
   }
-
-  render() {
-    const containerVisible = this.state.containerVisible || this.props.visible;
-    const contentVisible = this.state.layout && containerVisible;
-
-    return (
-      {containerVisible && <View
+  
+  renderModal() {
+    return <View
        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 100000 }}
       >
         <View
@@ -290,7 +286,15 @@ class CopilotModal extends Component<Props, State> {
           {contentVisible && this.renderMask()}
           {contentVisible && this.renderTooltip()}
         </View>
-      </View> }
+      </View>
+  }
+
+  render() {
+    const containerVisible = this.state.containerVisible || this.props.visible;
+    const contentVisible = this.state.layout && containerVisible;
+
+    return (
+      {containerVisible &&  this.renderModal()}
     );
   }
 }

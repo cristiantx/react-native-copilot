@@ -276,6 +276,9 @@ class CopilotModal extends Component<Props, State> {
   }
   
   renderModal() {
+    const containerVisible = this.state.containerVisible || this.props.visible;
+    const contentVisible = this.state.layout && containerVisible;
+
     return <View
        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 100000 }}
       >
@@ -291,11 +294,7 @@ class CopilotModal extends Component<Props, State> {
 
   render() {
     const containerVisible = this.state.containerVisible || this.props.visible;
-    const contentVisible = this.state.layout && containerVisible;
-
-    return (
-      {containerVisible &&  this.renderModal()}
-    );
+    return containerVisible ? this.renderModal() : null;
   }
 }
 
